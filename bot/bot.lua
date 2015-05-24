@@ -158,7 +158,7 @@ end
 -- Returns the config from config.lua file.
 -- If file doesnt exists, create it.
 function load_config( )
-  local f = assert(io.open('./data/config.lua', "r"))
+  local f = io.open('./data/config.lua', "r")
   -- If config.lua doesnt exists
   if not f then
     print ("Created new config file: data/config.lua")
