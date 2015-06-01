@@ -3,8 +3,14 @@ package.path = package.path .. ';.luarocks/share/lua/5.2/?.lua'
 package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'
 
 require("./bot/utils")
+-- require("/home/rutrus/.telegram-bot/bot/utils")
 
-VERSION = '0.13.0 PLUS'
+<<<<<<< HEAD
+
+VERSION = '0.12.2 PLUS'
+=======
+VERSION = '0.13.0'
+>>>>>>> 5021092d6f0d410eacc794d86220e26efa1a0456
 
 -- This function is called when tg receive a msg
 function on_msg_receive (msg)
@@ -53,8 +59,14 @@ function msg_valid(msg)
   elseif not msg.unread then
     print('\27[36mNot valid: readed\27[39m')
     return false
+<<<<<<< HEAD
 
   elseif not msg.to.id then
+=======
+  end
+
+  if not msg.to.id then
+>>>>>>> 5021092d6f0d410eacc794d86220e26efa1a0456
     print('\27[36mNot valid: To id not provided\27[39m')
     return false
     
@@ -74,7 +86,16 @@ function msg_valid(msg)
     print('\27[36mNot valid: service\27[39m')
     return false
   end
+<<<<<<< HEAD
+  
+=======
 
+  if msg.from.id == 777000 then
+    print('\27[36mNot valid: Telegram message\27[39m')
+    return false
+  end
+
+>>>>>>> 5021092d6f0d410eacc794d86220e26efa1a0456
   return true
 end
 
@@ -136,7 +157,7 @@ end
 function match_plugin(plugin, plugin_name, msg)
   local receiver = get_receiver(msg)
 
-  -- Go over patterns. If one matches is enough.
+  -- Go over patterns. If one matches is enought.
   for k, pattern in pairs(plugin.patterns) do
     local matches = match_pattern(pattern, msg.text)
     if matches then
@@ -173,10 +194,10 @@ function save_config( )
 end
 
 -- Returns the config from config.lua file.
--- If file doesn't exist, create it.
+-- If file doesnt exists, create it.
 function load_config( )
   local f = io.open('./data/config.lua', "r")
-  -- If config.lua doesn't exist
+  -- If config.lua doesnt exists
   if not f then
     print ("Created new config file: data/config.lua")
     create_config()
@@ -192,7 +213,7 @@ end
 
 -- Create a basic config.json file and saves it.
 function create_config( )
-  -- A simple config with basic plugins and ourselves as privileged user
+  -- A simple config with basic plugins and ourserves as priviled user
   config = {
     enabled_plugins = {
         "9gag",
@@ -201,6 +222,7 @@ function create_config( )
         "bugzilla",
         "calculator",
         "channels",
+        "danbooru",
         "download_media",
         "echo",
         "eur",

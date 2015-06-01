@@ -1,18 +1,21 @@
---~ Reduces echoes to 1 loop (flood with many bots)
+--~ Reduces echoes to 1 loop flood
 
 local function run(msg, matches)
-    if matches[1]:starts("!echo ") then
-        matches[1] = string.gsub(matches[1], "!echo", "")
-    end
-    vardump(matches[1])
-    return matches[1]
+  local text = matches[1]
+  local b = 1
+
+  while b ~= 0 do
+    text = text:trim()
+    text,b = text:gsub('^!+','')
+  end
+  return text
 end
 
 return {
-  description = "Makes the bot speak",
+  description = "Makes the bot say something",
   usage = "!echo [whatever]: Tells the bot what to say",
   patterns = {
-    "^!echo (.*)$"
+    "^!echo +(.+)$"
   }, 
   run = run 
 }

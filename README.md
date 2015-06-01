@@ -326,7 +326,7 @@ sudo apt-get update ; sudo apt-get upgrade
 
 ```bash
 # Tested on Ubuntu 14.04, for other OSs check out https://github.com/vysheng/tg#installation
-sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev make unzip git redis-server
+sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev make unzip git redis-server g++ libjansson-dev libpython-dev
 ```
 
 ```bash
