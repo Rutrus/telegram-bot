@@ -14,7 +14,7 @@ do
 
 function ban(usr,chat)
   print ("Trying to kick: "..usr.." to "..chat)
-  local success = chat_del_user (chat, usr, ok_cb, false)
+  local success = chat_del_user(chat, usr, ok_cb, false)
   if not success then
     return "An error happened"
   else
@@ -24,37 +24,33 @@ function ban(usr,chat)
 end
 
 function run(msg, matches)
-    chat_ = 'chat#id'..msg.to.id
+  local user = matches[2]
   -- The message must come from a chat group OR
-  if msg.to.type ~= 'chat' then
+  if msg.to.type == 'chat' then
+    local chat = 'chat#id'..msg.to.id
+    -- User submitted a user name
+    if matches[1] == "name" then
+      user = string.gsub(user," ","_")
+      ban(user,chat)
+    -- User submitted an id
+    elseif  matches[1] == "id" then
+        user = 'user#id'..matches[2]
+        ban(user,chat)
+    end
+  else
     return 'This isn\'t a chat group!'
   end
-
-  -- User submitted a user name
-  if matches[1] == "name" then
-    user_ = matches[2]
-    user_ = string.gsub(user_," ","_")
-    ban(user_,chat_)
-  -- User submitted an id
-  elseif  matches[1] == "id" then
-    for i=2,#matches do
-      user_ = 'user#id'..matches[i]
-      ban(user_,chat_)
-    end
-  end
-  user_ = nil
-  chat_ = nil
 end
 
 return {
-  description = "Ban an user from the chat group. Credits: @Rutrus",
+  description = "Ban an user from the chat group.",
   usage = {
-    "!kick name [user_name]", 
+    "!kick name [user_name]",
     "!kick id [user_id]+" },
   patterns = {
     "^!kick (name) (.*)",
     "^!kick (id) (%d+)"
-  }, 
+  },
   run = run,
   privileged = true
 }
