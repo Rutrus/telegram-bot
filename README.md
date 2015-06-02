@@ -230,6 +230,11 @@ Bot Commands
       </td>
     </tr>
     <tr>
+      <td>rss.lua</td>
+      <td>Manage User/Chat RSS subscriptions.</td>
+      <td>!rss: Get the rss subscriptions.<br>!rss subscribe (url): Subscribe to that url.<br>!rss unsubscribe (id): Unsubscribe of that id.<br>!rss sync: Sync the rss subscriptios now. Only sudo users can use this option.<br></td>
+    </tr>
+    <tr>
       <td>search_youtube.lua</td>
       <td>Search video on YouTube and send it.</td>
       <td>!youtube [term]: Search for a YouTube video and send it.</td>
@@ -326,7 +331,7 @@ sudo apt-get update ; sudo apt-get upgrade
 
 ```bash
 # Tested on Ubuntu 14.04, for other OSs check out https://github.com/vysheng/tg#installation
-sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev make unzip git redis-server g++ libjansson-dev libpython-dev
+sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev make unzip git redis-server g++ libjansson-dev libpython-dev expat libexpat1-dev
 ```
 
 ```bash
