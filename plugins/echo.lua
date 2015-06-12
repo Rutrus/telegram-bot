@@ -3,6 +3,9 @@
 local function run(msg, matches)
   local text = matches[1]
   local b = 1
+  if text:starts("!echo ") then
+    text = string.gsub(text, "!echo", "")
+  end
 
   while b ~= 0 do
     text = text:trim()
@@ -16,6 +19,6 @@ return {
   usage = "!echo [whatever]: Tells the bot what to say",
   patterns = {
     "^!echo +(.+)$"
-  }, 
-  run = run 
+  },
+  run = run
 }
