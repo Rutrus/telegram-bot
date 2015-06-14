@@ -48,7 +48,7 @@ local function send_generic(keybase, keymatch, receiverbase , text)
     return receivers
 end
 
-local function send_chats(text)
+local function send_groups(text)
     print("Sending broadcast to chats")
     return send_generic("chat:*:users", "chat:(%d+).*", "chat#id", text, n)
 end
@@ -68,15 +68,20 @@ local function run(msg, matches)
     if #matches == 1 then
         text = matches[1]
         receivers = send_users(text)
+        chats = send_groups(text)
     elseif #matches == 2 then
         text = matches[2]
+        if matches[1] == 'groups' then
+            chats = send_groups(text)
+        elseif matches[1] == 'users' then
+            receivers = send_users(text)
+        end
     end
 
-    chats = send_chats(text)
+
     nusers = #receivers
     nchats = #chats
 
-print(#matches)
     for i=1,#chats do
         receivers[#receivers+1] = chats[i]
     end
@@ -91,9 +96,11 @@ return {
     usage = {
           "!broadcast (message): Send the message to all chats and users."
         .."!broadcast (groups) (message): Send the message to group chats"
+        .."!broadcast (users) (message): Send the message to group chats"
     },
     patterns = {
         "^!broadcast (groups?) (.*)",
+        "^!broadcast (users?) (.*)",
         "^!broadcast (.*)"
     },
     privileged = true,
